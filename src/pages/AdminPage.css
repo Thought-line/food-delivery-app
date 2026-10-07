@@ -1,0 +1,42 @@
+.admin-shell {
+  display: flex;
+  flex-direction: column;
+  /* A hard cap, not min-height — the shell must never grow taller than the
+     viewport, or overflow-y below never actually triggers (the canvas just
+     grows to fit its content instead, and the whole page — sidebar included
+     — scrolls instead of staying put). No `flex: 1` here: #root is itself a
+     column flex container, and `flex: 1` (= `flex-basis: 0%`) competes with
+     an explicit `height` for sizing in that same axis — dropping it makes
+     `height` the sole, unambiguous authority on this element's size. */
+  height: 100svh;
+}
+
+.admin-shell-body {
+  flex: 1;
+  display: flex;
+  min-width: 0;
+  min-height: 0; /* lets this shrink to the shell's bound instead of growing to its content */
+}
+
+.admin-shell-canvas {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  /* Safety net, not the primary mechanism — AdminPanel/CameraManager scroll
+     their own table internally (.table-scroll) and stay within this box in
+     the normal case; this only catches content that doesn't. */
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .admin-shell-body {
+    flex-direction: column;
+  }
+
+  .admin-shell-canvas {
+    padding: 20px 16px 40px;
+  }
+}

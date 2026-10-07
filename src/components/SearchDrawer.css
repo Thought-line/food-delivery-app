@@ -1,0 +1,326 @@
+.search-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 70;
+  animation: fade-in-up 0.15s ease;
+}
+
+.search-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 71;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  /* Rounded on the left edge only — the side facing into the page; the
+     right edge stays flush against the viewport. */
+  border-top-left-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-lg);
+  overflow: hidden;
+  animation: search-drawer-slide-in 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@keyframes search-drawer-slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* ---------- Header ---------- */
+
+.search-drawer-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.search-drawer-close {
+  order: -1;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  background: var(--surface-2);
+  color: var(--text-h);
+  font-size: 1.15rem;
+  line-height: 1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+}
+
+.search-drawer-close:hover {
+  color: var(--accent);
+  box-shadow: none;
+  transform: none;
+}
+
+.search-drawer-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* ---------- Search field ---------- */
+
+/* Wraps the input row plus (when present) the connected hint line right
+   below it, so both read as one bordered control — the border highlights
+   whenever the field is focused or flagging a "too short" / "no match"
+   state, matching a native search-with-suggestions control. */
+.search-drawer-searchbox {
+  margin: 16px 20px 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.search-drawer-searchbox:focus-within,
+.search-drawer-searchbox.flagged {
+  border-color: var(--accent);
+  background: var(--surface);
+}
+
+.search-drawer-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+}
+
+.search-drawer-form-icon {
+  flex-shrink: 0;
+  display: flex;
+  color: var(--text-muted);
+}
+
+.search-drawer-form input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 0.85rem;
+  color: var(--text-h);
+}
+
+.search-drawer-form input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Our own CloseButton is the only clear affordance — hide the browser's
+   built-in one that type="search" adds on top of it (WebKit/Blink and old
+   Edge respectively), so there's just a single × instead of two. */
+.search-drawer-form input[type='search']::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.search-drawer-form input[type='search']::-ms-clear {
+  display: none;
+}
+
+.search-drawer-input-clear {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+}
+
+.search-drawer-input-clear:hover {
+  color: var(--accent);
+  box-shadow: none;
+  transform: none;
+}
+
+.search-drawer-hint {
+  margin: 0;
+  padding: 8px 12px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.search-drawer-section-label {
+  margin: 18px 20px 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* ---------- Results (horizontal, card-style scroller) ---------- */
+
+.search-drawer-list {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 20px 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+}
+
+.search-drawer-empty {
+  width: 100%;
+  padding: 24px 0;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.search-drawer-status {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 32px 20px;
+}
+
+.search-drawer-status-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-drawer-status h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-h);
+}
+
+.search-drawer-status p {
+  margin: 0;
+  max-width: 30ch;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.search-drawer-clear-btn {
+  margin-top: 4px;
+  padding: 8px 20px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: none;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: none;
+}
+
+.search-drawer-clear-btn:hover {
+  background: var(--accent-bg);
+  box-shadow: none;
+  transform: none;
+}
+
+.search-drawer-row {
+  flex: 0 0 132px;
+  width: 132px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  box-shadow: none;
+  transition: transform 0.15s ease;
+}
+
+.search-drawer-row:hover {
+  background: none;
+  box-shadow: none;
+  transform: translateY(-2px);
+}
+
+.search-drawer-row img,
+.search-drawer-thumb-empty {
+  width: 132px;
+  height: 110px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--surface-2);
+}
+
+.search-drawer-row-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.search-drawer-row-name {
+  font-weight: 700;
+  color: var(--text-h);
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-drawer-row-model {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-drawer-row-stock {
+  font-size: 0.7rem;
+  color: var(--success);
+}
+
+.search-drawer-row-stock.is-off {
+  color: var(--text-muted);
+}
+
+.search-drawer-row-price {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-h);
+  white-space: nowrap;
+}
+
+.search-drawer-row-price-unit {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+@media (max-width: 480px) {
+  .search-drawer {
+    max-width: 100%;
+  }
+}

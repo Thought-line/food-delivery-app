@@ -1,0 +1,11 @@
+.home-banner {
+  display: block;
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  aspect-ratio: 2170 / 517;
+  height: auto;
+  object-fit: cover;
+  object-position: center 53%;
+  margin-top: 24px;
+}

@@ -1,0 +1,206 @@
+.avail-cal {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.avail-cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.avail-cal-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.avail-cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  /* The app's global `button { padding: 9px 16px; border: 1px solid ... }`
+     (index.css) otherwise eats this fixed-size circle from the inside out —
+     32px of horizontal padding alone is bigger than the whole button, which
+     squeezed the chevron icon down to nothing. DateRangePicker.jsx avoids
+     this the same way, just with a blanket `all: unset` instead. */
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.avail-cal-nav:hover {
+  background: var(--border);
+  box-shadow: none;
+  transform: none;
+}
+
+.avail-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.avail-cal-weekday {
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 2px 0 6px;
+}
+
+.avail-cal-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+}
+
+/* Flat fill for the exclusive in-between days of a selected range, so
+   consecutive days visually connect — same trick DateRangePicker uses. */
+.avail-cal-cell-between {
+  background: var(--accent-bg);
+}
+
+.avail-cal-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  /* Same global button-padding leak as .avail-cal-nav above — a 1-2 digit
+     number tolerates the squeeze well enough to still look right, but it's
+     still wrong and worth killing here too. */
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.avail-cal-day:hover:not(:disabled) {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+  transform: none;
+}
+
+.avail-cal-day:disabled {
+  color: var(--border);
+  cursor: not-allowed;
+}
+
+/* Exact units-left tooltip on hover — same data-tooltip + :hover approach,
+   and the same dark bubble look, as the customer-facing DateRangePicker's
+   calendar (see DateRangePicker.jsx's STYLE_TAG), so admin and customer see
+   availability the same way. */
+.avail-cal-day[data-tooltip] { position: relative; }
+.avail-cal-day[data-tooltip]::after,
+.avail-cal-day[data-tooltip]::before {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.12s ease;
+  pointer-events: none;
+  z-index: 40;
+}
+.avail-cal-day[data-tooltip]::after {
+  content: attr(data-tooltip);
+  bottom: calc(100% + 9px);
+  padding: 5px 9px;
+  border-radius: 7px;
+  background: #1f2430;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(20, 20, 40, 0.22);
+}
+.avail-cal-day[data-tooltip]::before {
+  content: '';
+  bottom: calc(100% + 4px);
+  border: 5px solid transparent;
+  border-top-color: #1f2430;
+}
+.avail-cal-day[data-tooltip]:not(:disabled):hover::after,
+.avail-cal-day[data-tooltip]:not(:disabled):hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+.avail-cal-day-out {
+  opacity: 0.35;
+}
+
+.avail-cal-day-today {
+  box-shadow: inset 0 0 0 1.5px var(--text-muted);
+}
+
+/* Day tinting — how booked that day is. Selection (below) always wins over
+   this when a day is also a chosen start/end point. */
+.avail-cal-day-available {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.avail-cal-day-partial {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.avail-cal-day-full {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.avail-cal-day-selected {
+  background: var(--accent) !important;
+  color: var(--accent-text) !important;
+  font-weight: 700;
+}
+
+.avail-cal-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.avail-cal-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.avail-cal-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.avail-cal-dot-available {
+  background: var(--success);
+}
+
+.avail-cal-dot-partial {
+  background: var(--warning);
+}
+
+.avail-cal-dot-full {
+  background: var(--danger);
+}

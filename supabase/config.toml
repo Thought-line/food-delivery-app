@@ -1,0 +1,35 @@
+# Minimal Supabase CLI config — only here to pin per-function settings for
+# `supabase functions deploy`. This project is otherwise operated against the
+# hosted instance directly (SQL editor for migrations), not a local stack.
+
+project_id = "xwbdkamzsitltnmsdmpz"
+
+# Razorpay signs webhooks with its own secret, not a Supabase JWT, so this
+# function must accept unauthenticated requests. It verifies the
+# x-razorpay-signature HMAC itself before doing any work.
+[functions.razorpay-webhook]
+verify_jwt = false
+
+# These are called from the browser with the user's JWT (default), or
+# server-to-server; keep JWT verification on.
+[functions.create-booking-order]
+verify_jwt = true
+
+[functions.verify-payment]
+verify_jwt = true
+
+[functions.create-balance-order]
+verify_jwt = true
+
+[functions.send-booking-status-email]
+verify_jwt = true
+
+# Called from the browser with the admin's JWT; admin_retire_camera() does
+# its own role check server-side.
+[functions.retire-camera]
+verify_jwt = true
+
+# Called from the browser with the customer's JWT; cancel_my_booking() does
+# its own ownership check server-side.
+[functions.cancel-booking]
+verify_jwt = true

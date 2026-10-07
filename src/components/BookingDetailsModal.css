@@ -1,0 +1,289 @@
+.booking-details-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 50;
+  overflow-y: auto;
+  animation: fade-in-up 0.15s ease;
+}
+
+.booking-details-modal {
+  width: 100%;
+  max-width: 640px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 24px 28px;
+  animation: pop-in 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.booking-details-modal h3 {
+  margin: 0 0 20px;
+  padding-left: 14px;
+  border-left: 4px solid var(--accent);
+  font-weight: 800;
+  color: var(--text-h);
+}
+
+.booking-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 24px;
+  margin-bottom: 20px;
+}
+
+.booking-details-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* Orange icon badge — every field gets one, same accent used across the
+   rest of the site (navbar, buttons), tying this modal to that palette. */
+.booking-details-icon {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.booking-details-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.booking-details-label {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Bold, near-black value — the actual data reads as the heaviest thing in
+   each row, with the label/icon just there to identify it. */
+.booking-details-value {
+  font-weight: 700;
+  color: var(--text-h);
+  font-size: 0.95rem;
+  word-break: break-word;
+}
+
+.booking-details-status {
+  text-transform: capitalize;
+}
+
+.view-document-btn {
+  align-self: flex-start;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+}
+
+/* Spans the full modal width — holds richer, interactive content (upload
+   controls + a row of thumbnails) that a half grid column is too narrow
+   for, unlike the plain label/value items around it. */
+.booking-details-item-doc {
+  grid-column: 1 / -1;
+}
+
+.admin-doc-view-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.admin-doc-upload {
+  margin-top: 2px;
+}
+
+.admin-doc-upload-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-doc-upload select {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 0.78rem;
+  font-family: inherit;
+  background: var(--surface);
+  color: var(--text-h);
+}
+
+.admin-doc-upload-input {
+  display: none;
+}
+
+.admin-doc-submit-btn {
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+.admin-doc-submit-btn:hover {
+  background: var(--accent-hover);
+}
+
+.admin-doc-preview-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.admin-doc-preview {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  flex-shrink: 0;
+}
+
+.admin-doc-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.admin-doc-preview-file {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* The "cross" sits at the top of the thumbnail, per spec — a small circular
+   badge overlapping the top-right corner rather than inline text. */
+.admin-doc-preview-remove {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-h);
+  font-size: 0.9rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.admin-doc-preview-remove:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
+
+.admin-doc-edit-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.admin-doc-cancel-btn {
+  padding: 4px 12px;
+  font-size: 0.78rem;
+}
+
+/* In-page lightbox for "View N" — stacks above booking-details-overlay
+   (z-index 50) instead of opening a new browser tab. */
+.doc-viewer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  z-index: 60;
+  animation: fade-in-up 0.15s ease;
+}
+
+.doc-viewer-modal {
+  position: relative;
+  max-width: min(90vw, 800px);
+  max-height: 90vh;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow-md);
+}
+
+.doc-viewer-close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-h);
+  font-size: 1.2rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.doc-viewer-close:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
+
+.doc-viewer-image {
+  display: block;
+  max-width: 100%;
+  max-height: calc(90vh - 32px);
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+.doc-viewer-frame {
+  display: block;
+  width: min(80vw, 760px);
+  height: 80vh;
+  border: none;
+  border-radius: 8px;
+}
+
+.booking-details-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}

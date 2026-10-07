@@ -1,0 +1,269 @@
+.camera-list-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 16px;
+}
+
+.camera-list-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.camera-list-count {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .camera-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+/* #camera-grid is the persistent wrapper scrolled to on a date change (see
+   CameraList.jsx) — it stays mounted through loading/error/empty/populated
+   states, unlike the .camera-grid it contains. scroll-margin-top keeps the
+   scrolled-to spot clear of the sticky navbar. */
+#camera-grid {
+  scroll-margin-top: 90px;
+}
+
+.camera-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px;
+  animation: fade-in-up 0.3s ease;
+}
+
+.camera-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  text-align: left;
+  padding: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.camera-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-border);
+}
+
+.camera-card-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 14px 14px 0;
+}
+
+.camera-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.camera-status-pill {
+  padding: 3px 11px;
+  border: 1.5px solid var(--success);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--success);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.camera-status-pill.is-off {
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+.camera-badge-new {
+  padding: 3px 11px;
+  border: 1.5px solid var(--info);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--info);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.camera-badge-trending {
+  padding: 3px 11px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: var(--accent-text);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.camera-wishlist-btn {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+/* Hidden until the card is hovered/focused (or already picked) — a touch
+   device with no hover still shows it once it's active, so it's reachable. */
+.camera-card:hover .camera-wishlist-btn,
+.camera-card:focus-within .camera-wishlist-btn,
+.camera-wishlist-btn.is-active {
+  opacity: 1;
+}
+
+.camera-wishlist-btn:hover {
+  color: var(--danger);
+  box-shadow: none;
+  transform: scale(1.1);
+}
+
+.camera-wishlist-btn.is-active {
+  color: var(--danger);
+}
+
+.camera-thumb {
+  position: relative;
+  height: 160px;
+  padding: 12px;
+  overflow: visible;
+  background: var(--surface);
+}
+
+.camera-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.camera-card:hover .camera-thumb img {
+  transform: scale(1.06);
+}
+
+.camera-thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--text-muted);
+}
+
+.camera-thumb-placeholder span {
+  font-size: 0.75rem;
+}
+
+.camera-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.camera-card h3 {
+  padding: 10px 16px 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.3;
+  min-height: calc(1.3em * 2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.camera-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 16px 16px;
+  min-height: 40px;
+}
+
+.price-block {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.price-amount {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-h);
+  line-height: 1.1;
+}
+
+.price-unit {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.price-subtext {
+  margin-top: 2px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.camera-add-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--text-h);
+  background: var(--surface);
+  color: var(--text-h);
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.camera-add-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.camera-card-footer .quantity-stepper {
+  margin-left: auto;
+  padding: 4px 12px;
+  gap: 12px;
+}
+

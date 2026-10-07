@@ -1,0 +1,256 @@
+.hero {
+  position: relative;
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-top: -40px;
+  margin-bottom: 32px;
+  padding: 10px 32px;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 90% at 82% 15%, rgba(255, 90, 0, 0.22), transparent 60%),
+    radial-gradient(45% 70% at 8% 100%, rgba(255, 60, 0, 0.14), transparent 65%),
+    linear-gradient(180deg, #0c0b10, #16141c 60%, #0c0b10);
+  color: #fff;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1180px;
+  min-height: 380px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.hero-left {
+  position: static;
+  text-align: left;
+  align-self: start;
+}
+
+.hero-eyebrow {
+  margin: 0 0 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.hero-title {
+  margin: 0 0 16px;
+  font-size: clamp(1.9rem, 3.4vw, 2.85rem);
+  line-height: 1.18;
+  color: #fff;
+  font-weight: 700;
+}
+
+.hero-title-accent {
+  color: var(--accent);
+}
+
+.hero-subtitle {
+  margin: 0 0 28px;
+  max-width: 460px;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.hero-features {
+  display: flex;
+  gap: 26px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-feature-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  background: rgba(255, 107, 0, 0.08);
+}
+
+.hero-feature-text {
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* --- right side: product composition --- */
+
+.hero-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
+  isolation: isolate;
+  animation: fade-in-up 0.3s ease;
+}
+
+.hero-camera-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(closest-side, rgba(255, 107, 0, 0.24), transparent 70%);
+  filter: blur(6px);
+}
+
+.hero-camera-img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  /* A definite height (not max-height) reserves this box the instant the
+     page lays out — before the image has even started downloading — so
+     nothing around it (the floating price cards especially) has anywhere
+     to shift into while it loads. object-fit still letterboxes the real
+     photo to fit without distorting it. */
+  height: 380px;
+  object-fit: contain;
+  /* The photo is already shot on a near-black studio background — fade its
+     own edges out instead of adding a shadow, so it blends into the hero's
+     gradient instead of sitting in a visible rectangle. */
+  mask-image: radial-gradient(closest-side, #000 78%, transparent 100%);
+  -webkit-mask-image: radial-gradient(closest-side, #000 78%, transparent 100%);
+}
+
+.hero-float-card {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: rgba(20, 18, 16, 0.72);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.6);
+  animation: fade-in-up 0.4s ease;
+}
+
+.hero-float-card--top {
+  top: 6%;
+  left: -2%;
+}
+
+.hero-float-card--bottom {
+  bottom: 8%;
+  right: -2%;
+}
+
+.hero-float-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+}
+
+.hero-float-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.hero-float-body strong {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.hero-float-price {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.hero-float-status {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--success);
+}
+
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .hero-left {
+    text-align: center;
+  }
+
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-features {
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 16px;
+  }
+
+  .hero-feature {
+    flex-direction: column;
+    text-align: center;
+    gap: 6px;
+  }
+
+  .hero-right {
+    min-height: 260px;
+  }
+
+  .hero-camera-img {
+    max-width: 480px;
+    height: 300px;
+  }
+
+  .hero-float-card--top {
+    top: 0;
+    left: 4%;
+  }
+
+  .hero-float-card--bottom {
+    bottom: 0;
+    right: 4%;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    margin-top: -24px;
+    padding: 36px 18px 28px;
+  }
+
+  /* Keep the camera fully visible on narrow phones — drop the floating
+     price cards rather than shrinking them into unreadable clutter. */
+  .hero-float-card {
+    display: none;
+  }
+}

@@ -1,0 +1,18 @@
+.brand-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.brand-logo-text {
+  font-family: 'Inter', 'Segoe UI', system-ui, Roboto, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+
+.brand-logo-text-accent {
+  color: var(--accent);
+}

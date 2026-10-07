@@ -1,0 +1,274 @@
+.cam-avail-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 14, 20, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 120;
+  animation: fade-in-up 0.15s ease;
+  overflow-y: auto;
+}
+
+.cam-avail-modal {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 28px 28px 24px;
+  animation: pop-in 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cam-avail-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cam-avail-close:hover {
+  background: var(--border);
+}
+
+.cam-avail-title {
+  margin: 0 0 2px;
+  padding-right: 40px;
+}
+
+.cam-avail-subtitle {
+  margin: 0 0 18px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.cam-avail-body {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.cam-avail-calendar-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.cam-avail-bookings-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.cam-avail-bookings-col h4,
+.cam-avail-block-form h4 {
+  margin: 0 0 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.cam-avail-block-form {
+  margin-top: 18px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.cam-avail-block-range {
+  margin: 0 0 10px;
+  font-weight: 700;
+  color: var(--text-h);
+  font-size: 0.85rem;
+}
+
+.cam-avail-block-qty-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.cam-avail-note-input {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-h);
+}
+
+.cam-avail-note-input.has-error {
+  border-color: var(--danger);
+}
+
+/* Why the camera's being blocked — maintenance vs. an offline booking for
+   a person, each with its own follow-up field(s) below. */
+.cam-avail-hold-type-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.cam-avail-hold-type-row label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+
+.cam-avail-hold-type-row label.is-active {
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+.cam-avail-hold-type-row input[type='radio'] {
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.cam-avail-person-fields {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Small inline message under a field — matches AddCameraForm's/
+   BookingForm's own .field-error (plain red text, not the boxed
+   .error/p[role=alert] treatment). Scoped to the whole block-form (not just
+   .cam-avail-person-fields) so the maintenance-reason field's own error
+   below gets the same treatment. */
+.cam-avail-block-form .field-error {
+  display: block;
+  margin: -6px 0 4px;
+  color: var(--danger);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.cam-avail-amount-preview {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.cam-avail-block-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.cam-avail-block-confirm {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+.cam-avail-success {
+  margin: 8px 0 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--success);
+}
+
+.cam-avail-booking-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.cam-avail-booking-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.78rem;
+}
+
+/* Dates get their own full-width line, always — this is a fixed string
+   ("dd.mm.yyyy → dd.mm.yyyy") that must never mid-word wrap, and giving it
+   the whole row width means it never has to fight the name/qty/badge below
+   for space, so every row lines up the same regardless of how long the
+   customer's name is. */
+.cam-avail-booking-dates {
+  font-weight: 600;
+  color: var(--text-h);
+  white-space: nowrap;
+}
+
+.cam-avail-booking-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cam-avail-booking-who {
+  color: var(--text-muted);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cam-avail-booking-qty {
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.admin-hold-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--info-bg);
+  color: var(--info);
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .cam-avail-body {
+    flex-direction: column;
+  }
+}

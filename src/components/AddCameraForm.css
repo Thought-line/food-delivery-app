@@ -1,0 +1,192 @@
+.add-camera-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 640px;
+  padding: 18px 20px;
+  margin: 0 auto 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.add-camera-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Pairs two fields side by side (Name+Model, Stock+Price) instead of
+   stacking every field in one long column — cuts the modal's overall
+   height enough that it fits most screens without needing to scroll. */
+.add-camera-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.add-camera-form-hint {
+  margin: -4px 0 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Tighter than the app-wide input padding — this form packs several
+   fields into one modal, so a compact rhythm keeps it from scrolling. */
+.add-camera-form input {
+  padding: 8px 12px;
+}
+
+.add-camera-form input.has-error {
+  border-color: var(--danger);
+}
+
+.add-camera-form textarea {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-h);
+  resize: vertical;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.add-camera-form textarea:hover {
+  border-color: var(--accent-border);
+}
+
+.add-camera-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-bg);
+}
+
+.add-camera-form textarea.has-error {
+  border-color: var(--danger);
+}
+
+.add-camera-form .field-error {
+  color: var(--danger);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.add-camera-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-camera-form-actions button[type='submit'] {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  border-color: var(--accent);
+  color: var(--accent-text);
+  box-shadow: 0 6px 16px -6px var(--accent-border);
+}
+
+.add-camera-form-actions button[type='submit']:hover {
+  filter: brightness(1.06);
+}
+
+.add-camera-form-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.add-camera-form-cancel {
+  background: var(--surface-2);
+  color: var(--text-muted);
+}
+
+.photo-count-hint {
+  font-weight: 400;
+}
+
+.photo-cover-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.photo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.photo-preview {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+}
+
+.photo-add-tile {
+  position: relative;
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  border: 1.5px dashed var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  line-height: 1;
+  overflow: hidden;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.photo-add-tile:hover {
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+.photo-add-tile.has-error {
+  border-color: var(--danger);
+}
+
+.photo-add-tile input[type='file'] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+}
+
+.photo-preview-remove {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--danger);
+  border: 2px solid var(--surface);
+  color: #fff;
+  font-size: 0.85rem;
+  line-height: 1;
+  box-shadow: var(--shadow-sm);
+}
+
+.photo-preview-remove:hover {
+  filter: brightness(1.1);
+}

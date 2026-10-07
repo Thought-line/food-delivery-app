@@ -1,0 +1,615 @@
+/* Constrained and centered, same reasoning as Wishlist/My Bookings — the
+   page's own header card and form aren't meant to stretch edge-to-edge on
+   a wide screen, which was leaving huge gaps either side of short rows
+   like the name/phone header and the address grid. */
+.profile-page {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* --- In-page document viewer — opened from "View N" instead of a new
+   browser tab. Same look as BookingDetailsModal's own doc-viewer-*,
+   replicated under this page's own class names rather than importing that
+   admin-only stylesheet into a customer page. --- */
+.doc-viewer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  z-index: 60;
+  animation: fade-in-up 0.15s ease;
+}
+
+.doc-viewer-modal {
+  position: relative;
+  max-width: min(90vw, 800px);
+  max-height: 90vh;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow-md);
+}
+
+.doc-viewer-close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-h);
+  font-size: 1.2rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.doc-viewer-close:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
+
+.doc-viewer-image {
+  display: block;
+  max-width: 100%;
+  max-height: calc(90vh - 32px);
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+.doc-viewer-frame {
+  display: block;
+  width: min(80vw, 760px);
+  height: 80vh;
+  border: none;
+  border-radius: 8px;
+}
+
+.profile-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.profile-page-header h2 {
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+/* --- View/Edit tabs — a client-side toggle sharing this one page, not a
+   navigation. Same muted-teal accent as the rest of this page. --- */
+.profile-tabs {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 18px;
+  padding: 3px;
+  background: var(--surface-2);
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.profile-tab {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.78rem;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.profile-tab:hover {
+  color: var(--text-h);
+  box-shadow: none;
+  transform: none;
+}
+
+.profile-tab.is-active {
+  background: var(--surface);
+  color: #2f6b5c;
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- View profile — header card, address grid, identity document
+   summary. --- */
+.profile-view {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-view-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e4ece9;
+  color: #2f6b5c;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.profile-view-identity {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-view-identity h3 {
+  margin: 0 0 2px;
+  color: var(--text-h);
+}
+
+.profile-view-identity p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.profile-view-section {
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-view-section-title {
+  margin: 0 0 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.profile-view-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 24px;
+}
+
+.profile-view-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.profile-view-field-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.profile-view-field-value {
+  font-weight: 600;
+  color: var(--text-h);
+  word-break: break-word;
+}
+
+.profile-doc-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.profile-doc-summary-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.profile-doc-type {
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.profile-doc-summary-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.identity-doc-view-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-h);
+  font-weight: 600;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  box-shadow: none;
+}
+
+.identity-doc-view-btn:hover {
+  background: var(--surface-2);
+  box-shadow: none;
+  transform: none;
+}
+
+.identity-doc-view-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+@media (max-width: 640px) {
+  .profile-view-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-view-header {
+    flex-wrap: wrap;
+  }
+}
+
+/* --- Edit Address form — bordered fields, grouped into sections separated
+   by a thick divider bar, with a Cancel/Save & continue footer. Uses its
+   own muted-teal accent (--profile-accent) for focus states and links
+   instead of the site's orange --accent — deliberately, to match a
+   specific reference design — and near-black for the primary button.
+   Page-local, not meant to be reused elsewhere. --- */
+.address-edit-card {
+  --profile-accent: #2f6b5c;
+  --profile-accent-hover: #244f45;
+  --profile-accent-bg: #e4ece9;
+  width: 100%;
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  /* Bounded so any overflow scrolls inside the card itself, not the page.
+     A viewport-percentage cap (rather than subtracting a guessed pixel
+     amount for the navbar/header/padding above it) stays correct however
+     tall that chrome actually renders, on any screen size. */
+  max-height: 78vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.address-edit-title {
+  margin: 0;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.address-edit-section {
+  padding: 12px 20px 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.address-edit-divider {
+  height: 8px;
+  background: var(--surface-2);
+}
+
+.address-edit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.address-field {
+  display: block;
+}
+
+.address-field-label {
+  display: block;
+  color: var(--text-h);
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+
+.address-field-required {
+  color: #a8362e;
+}
+
+.address-field-control {
+  position: relative;
+}
+
+.address-field-control.has-icon .address-field-icon {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  display: flex;
+  pointer-events: none;
+}
+
+.address-field input,
+.address-field-control select {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 13px;
+  background: var(--surface);
+  color: var(--text-h);
+  font-weight: 500;
+  font-size: 0.92rem;
+  font-family: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.address-field-control.has-icon input {
+  padding-left: 38px;
+}
+
+.address-field-control select {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%236b6f76' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M5 8l5 5 5-5'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.address-field-control select.is-placeholder {
+  color: var(--text-muted);
+}
+
+.address-field input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+.address-field input:focus,
+.address-field-control select:focus {
+  outline: none;
+  border-color: var(--profile-accent, #2f6b5c);
+  box-shadow: 0 0 0 4px var(--profile-accent-bg, #e4ece9);
+}
+
+.address-field.has-error input,
+.address-field.has-error .address-field-control select {
+  border-color: var(--danger);
+}
+
+.address-field-helper {
+  display: block;
+  margin-top: 6px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.address-field .field-error,
+.identity-doc-form .field-error {
+  display: block;
+  margin-top: 6px;
+  color: var(--danger);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.address-edit-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+  padding: 18px 20px 20px;
+  border-top: 1px solid var(--border);
+}
+
+/* Scoped as .address-edit-footer .address-edit-save (2 classes), not just
+   .address-edit-save (1 class) — needs to outrank the global `form
+   button[type='submit']` gradient rule (index.css), which otherwise wins
+   on specificity. */
+.address-edit-footer .address-edit-cancel,
+.address-edit-footer .address-edit-save {
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.address-edit-footer .address-edit-cancel:hover,
+.address-edit-footer .address-edit-save:hover {
+  transform: none;
+}
+
+.address-edit-footer .address-edit-cancel {
+  background: var(--surface);
+  color: var(--text-h);
+  border: 1.5px solid var(--border);
+  box-shadow: none;
+}
+
+.address-edit-footer .address-edit-cancel:hover {
+  background: var(--surface-2);
+  box-shadow: none;
+}
+
+/* Near-black, not the site's orange accent — this form's own primary
+   action deliberately reads as a distinct "final step" button. */
+.address-edit-footer .address-edit-save {
+  background: #171b21;
+  border: 1.5px solid #171b21;
+  color: #fff;
+  box-shadow: none;
+}
+
+.address-edit-footer .address-edit-save:hover {
+  background: #262c35;
+  border-color: #262c35;
+  box-shadow: none;
+}
+
+/* --- Identity Document — a titled sub-section inside the edit form's own
+   .address-edit-section, not its own bordered/shadowed box. --- */
+.identity-doc-section {
+  margin-top: 18px;
+}
+
+.identity-doc-title {
+  margin: 0 0 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-h);
+}
+
+.identity-doc-description {
+  margin: 0 0 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.identity-doc-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.identity-doc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.identity-doc-field > span {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-h);
+}
+
+.identity-doc-field-hint {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+/* --- Same photo-grid look as Manage Camera's own photo upload
+   (AddCameraForm.css's .photo-grid/.photo-preview/.photo-add-tile) —
+   replicated under this page's own class names rather than importing that
+   admin-only stylesheet into a customer page. --- */
+.identity-doc-photo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.identity-doc-photo-preview {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+}
+
+.identity-doc-photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+}
+
+.identity-doc-file-icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-muted);
+}
+
+.identity-doc-add-tile {
+  position: relative;
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  border: 1.5px dashed var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  line-height: 1;
+  overflow: hidden;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.identity-doc-add-tile:hover {
+  border-color: var(--profile-accent, #2f6b5c);
+  color: var(--profile-accent, #2f6b5c);
+}
+
+.identity-doc-add-tile.has-error {
+  border-color: var(--danger);
+}
+
+.identity-doc-add-tile input[type='file'] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.identity-doc-photo-remove {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--danger);
+  border: 2px solid var(--surface);
+  color: #fff;
+  font-size: 0.85rem;
+  line-height: 1;
+  box-shadow: var(--shadow-sm);
+}
+
+.identity-doc-photo-remove:hover {
+  filter: brightness(1.1);
+}

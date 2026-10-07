@@ -1,0 +1,124 @@
+/* Same "small, non-blocking, dismissible-with-×" language as
+   BookingStatusToast.css, at the opposite corner so the two never collide. */
+
+.review-prompt-card {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 60;
+  width: 300px;
+  max-width: calc(100vw - 32px);
+  padding: 18px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  text-align: left;
+  animation: review-prompt-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.review-prompt-close {
+  float: right;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+}
+
+.review-prompt-close:hover {
+  background: var(--surface-2);
+  color: var(--text-h);
+  box-shadow: none;
+  transform: none;
+}
+
+.review-prompt-title {
+  margin: 0 0 6px;
+  font-size: 0.98rem;
+}
+
+.review-prompt-text {
+  margin: 0 0 10px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.review-prompt-text strong {
+  color: var(--text-h);
+}
+
+.review-prompt-stars {
+  margin-bottom: 8px;
+}
+
+.review-prompt-subtext {
+  margin: 0 0 14px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.review-prompt-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.review-prompt-write {
+  padding: 10px 16px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: var(--accent-text);
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: 0 6px 16px -6px var(--accent-border);
+}
+
+.review-prompt-write:hover {
+  filter: brightness(1.06);
+}
+
+.review-prompt-later {
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.review-prompt-later:hover {
+  color: var(--text-h);
+  box-shadow: none;
+  transform: none;
+}
+
+@keyframes review-prompt-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .review-prompt-card {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+  }
+}

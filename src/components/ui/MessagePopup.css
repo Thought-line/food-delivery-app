@@ -1,0 +1,116 @@
+.message-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 14, 20, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 200;
+  animation: fade-in-up 0.18s ease;
+}
+
+.message-popup {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  background: var(--surface);
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg);
+  padding: 40px 32px 32px;
+  text-align: center;
+  animation: pop-in 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.message-popup-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-popup-error .message-popup-icon {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.message-popup-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.message-popup-title {
+  margin: 0 0 10px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-h);
+  letter-spacing: -0.01em;
+}
+
+.message-popup-text {
+  margin: 0 0 28px;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.message-popup-ok {
+  display: block;
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: var(--accent-text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 6px 16px -6px var(--accent-border);
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+
+.message-popup-ok:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 10px 22px -6px var(--accent-border);
+  transform: none;
+}
+
+.message-popup-ok:active {
+  transform: scale(0.98);
+}
+
+.message-popup-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.message-popup-close:hover {
+  background: var(--border);
+}
+
+@media (max-width: 420px) {
+  .message-popup {
+    padding: 32px 22px 24px;
+    border-radius: 20px;
+  }
+}

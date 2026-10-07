@@ -1,0 +1,263 @@
+/* My Bookings — centered header (matching WishlistPage.css), then
+   vertically-stacked bordered/shadowed cards: image + details on the left,
+   status badge stacked directly above the action buttons in one tight
+   right-aligned column — same badge-above-actions grouping the wishlist
+   cards use for their badge/trash corner. */
+
+.my-bookings {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.my-bookings-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.my-bookings-header h2 {
+  margin: 0;
+}
+
+.back-to-cameras {
+  padding: 8px 16px;
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.back-to-cameras:hover {
+  background: var(--surface-2);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.my-bookings > p:not(.error) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  padding: 8px 0;
+}
+
+.my-bookings > p:not(.error)::before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  animation: spin 0.7s linear infinite;
+}
+
+.booking-list {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.booking-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: var(--shadow-sm);
+}
+
+.booking-card-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 220px;
+}
+
+.booking-card-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.booking-card-thumb {
+  flex-shrink: 0;
+  width: 84px;
+  height: 84px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.booking-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.booking-card-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.booking-camera {
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.booking-dates {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.booking-payment {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.booking-pay-balance {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-text, #fff);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.booking-pay-balance:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.booking-cancel-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--danger);
+  background: transparent;
+  color: var(--danger);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.booking-cancel-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.booking-invoice-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.booking-invoice-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.booking-card-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.status-badge.status-confirmed,
+.status-badge.status-active {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.status-badge.status-rejected,
+.status-badge.status-cancelled {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.status-badge.status-requested {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.booking-overdue-badge {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+@media (max-width: 520px) {
+  .booking-card {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .booking-card-top {
+    min-width: 100%;
+  }
+
+  .booking-card-side {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .booking-card-actions {
+    justify-content: flex-start;
+  }
+
+  .booking-card-thumb {
+    width: 64px;
+    height: 64px;
+  }
+}

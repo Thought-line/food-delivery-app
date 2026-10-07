@@ -1,0 +1,165 @@
+
+.site-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 14px 32px;
+  background: #1a1a1a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-date-picker {
+  justify-self: center;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-self: end;
+}
+
+/* Below this width the pill doesn't fit alongside logo + actions, so it
+   drops to its own full-width row instead of disappearing — changing
+   rental dates from Home needs to stay possible on every screen. */
+@media (max-width: 900px) {
+  .site-navbar {
+    grid-template-columns: 1fr auto;
+    row-gap: 10px;
+  }
+
+  .nav-date-picker {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+}
+
+.site-navbar a {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.site-navbar a:hover {
+  color: var(--accent);
+}
+
+.nav-login-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.nav-login-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+}
+
+.nav-search-btn {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  background: none;
+  padding: 0;
+  box-shadow: none;
+  color: #e5e7eb;
+}
+
+.nav-search-btn:hover {
+  color: var(--accent);
+  border: none;
+  background: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.nav-cart-link,
+.nav-wishlist-link,
+.nav-bookings-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Scoped as .site-navbar .nav-cart-link (not just .nav-cart-link) so this
+   beats the generic ".site-navbar button" rule below on specificity —
+   this is a <button> now (it opens the cart drawer), not a plain link,
+   and needs to look like the icon-only link it used to be, not a CTA. */
+.site-navbar .nav-cart-link {
+  border: none;
+  background: none;
+  padding: 0;
+  box-shadow: none;
+  color: #e5e7eb;
+}
+
+.site-navbar .nav-cart-link:hover {
+  color: var(--accent);
+  border: none;
+  background: none;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Shared small numeric pill for both the cart icon and the "My Wishlist"
+   link — same look, same pulse-on-change, just anchored to a different
+   parent (.nav-cart-link / .nav-wishlist-link, both position: relative). */
+.site-navbar .nav-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background: var(--danger);
+  border: 2px solid #1a1a1a;
+  color: #fff;
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  min-width: 18px;
+  text-align: center;
+  line-height: 1.4;
+  animation: nav-badge-pulse 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.site-navbar .nav-badge::before {
+  content: none;
+}
+
+@keyframes nav-badge-pulse {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .site-navbar {
+    padding: 12px 16px;
+    gap: 14px;
+  }
+
+  .nav-actions {
+    gap: 14px;
+  }
+}

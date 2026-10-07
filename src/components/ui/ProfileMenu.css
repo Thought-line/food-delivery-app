@@ -1,0 +1,174 @@
+.nav-profile {
+  position: relative;
+}
+
+.nav-profile .nav-profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 14px 5px 5px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: none;
+  color: var(--text-h);
+}
+
+.nav-profile .nav-profile-btn:hover {
+  background: var(--surface-2);
+  border-color: var(--accent-border);
+  color: var(--text-h);
+  transform: none;
+}
+
+.nav-profile-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-text, #fff);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.nav-profile-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-profile-chevron {
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.nav-profile-btn[aria-expanded='true'] .nav-profile-chevron {
+  transform: rotate(180deg);
+}
+
+/* Scoped as .nav-profile-menu (2-class specificity via a descendant chain
+   from .nav-profile) where needed — this whole block needs to outrank
+   .site-navbar a/button's own color rules, since these are rendered inside
+   .site-navbar and would otherwise inherit the nav's own link/button
+   colors, making text invisible against this dropdown's light background. */
+.nav-profile-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  padding: 6px;
+  z-index: 20;
+  animation: fade-in-up 0.15s ease;
+}
+
+.nav-profile-menu .nav-profile-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--text-h);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.nav-profile-menu .nav-profile-item svg {
+  flex-shrink: 0;
+}
+
+.nav-profile-menu .nav-profile-item:hover,
+.nav-profile-menu .nav-profile-item:focus-visible {
+  background: var(--surface-2);
+  color: var(--text-h);
+  transform: none;
+  box-shadow: none;
+}
+
+.nav-profile-menu .nav-profile-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.nav-profile-menu .nav-profile-item-danger {
+  color: var(--danger);
+}
+
+.nav-profile-menu .nav-profile-item-danger:hover,
+.nav-profile-menu .nav-profile-item-danger:focus-visible {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.nav-profile-divider {
+  height: 1px;
+  margin: 6px 4px;
+  background: var(--border);
+}
+
+/* --- Log out confirmation dialog — centered, icon-led, stacked full-width
+     buttons (primary action on top) instead of ConfirmDialog's plain
+     left-aligned/side-by-side default. --- */
+.logout-confirm-modal {
+  text-align: center;
+}
+
+.logout-confirm-modal h3 {
+  margin-bottom: 6px;
+}
+
+.logout-confirm-modal p {
+  margin-bottom: 22px;
+}
+
+.logout-confirm-actions {
+  flex-direction: column;
+}
+
+.logout-confirm-primary {
+  width: 100%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  border: none;
+  color: var(--accent-text);
+  box-shadow: 0 6px 16px -6px var(--accent-border);
+}
+
+.logout-confirm-primary:hover {
+  filter: brightness(1.06);
+}
+
+.logout-confirm-secondary {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  box-shadow: none;
+}
+
+.logout-confirm-secondary:hover {
+  background: var(--surface-2);
+  border-color: var(--accent-border);
+  color: var(--accent);
+  box-shadow: none;
+  transform: none;
+}

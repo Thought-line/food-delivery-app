@@ -1,0 +1,25 @@
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--accent);
+}
+
+.star-rating-star {
+  display: flex;
+}
+
+.star-rating-btn {
+  padding: 2px;
+  border: none;
+  background: none;
+  color: inherit;
+  display: flex;
+  box-shadow: none;
+  transition: transform 0.1s ease;
+}
+
+.star-rating-btn:hover {
+  transform: scale(1.15);
+  box-shadow: none;
+}

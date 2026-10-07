@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(npm run build)",
+      "PowerShell(Start-Process -FilePath \"npm\" -ArgumentList \"run\",\"dev\" -WorkingDirectory \"c:\\\\Users\\\\Lenovo\\\\OneDrive\\\\Desktop\\\\rentalproject\" -RedirectStandardOutput \"c:\\\\Users\\\\Lenovo\\\\OneDrive\\\\Desktop\\\\rentalproject\\\\dev-out.log\" -RedirectStandardError \"c:\\\\Users\\\\Lenovo\\\\OneDrive\\\\Desktop\\\\rentalproject\\\\dev-err.log\" -WindowStyle Hidden)",
+      "PowerShell(supabase secrets list)",
+      "PowerShell(npx supabase secrets list)",
+      "PowerShell(npx supabase secrets set MAILTRAP_SMTP_PORT=465)",
+      "PowerShell(npx supabase functions deploy send-booking-status-email)",
+      "PowerShell($b='https://deno.land/x/denomailer@1.6.0'; foreach\\($f in 'client/basic/client.ts','client/basic/connection.ts'\\){ \"=== $f\"; \\(Invoke-WebRequest -UseBasicParsing \"$b/$f\"\\).Content | Select-String -Pattern 'noStartTLS|allowUnsecure|startTls|STARTTLS|unsecure' -Context 2,2 | ForEach-Object { $_.ToString\\(\\) } })",
+      "PowerShell($b='https://deno.land/x/denomailer@1.6.0'; foreach\\($f in 'client/basic/client.ts','client/basic/connection.ts','client/mod.ts','config/client.ts'\\){ \"=== $f\"; try { $r=Invoke-WebRequest -UseBasicParsing \"$b/$f\" -Headers @{Accept='text/plain'}; $r.Content.Substring\\(0,[Math]::Min\\(200,$r.Content.Length\\)\\) } catch { $_.Exception.Message } })",
+      "PowerShell($b='https://deno.land/x/denomailer@1.6.0'; foreach\\($f in 'client/basic/client.ts','client/basic/connection.ts','config/client.ts'\\){ \"=== $f\"; try { $t=[Text.Encoding]::UTF8.GetString\\(\\(Invoke-WebRequest -UseBasicParsing \"$b/$f\"\\).Content\\); \\($t -split \"`n\" | Select-String -Pattern 'noStartTLS|allowUnsecure|startTls|STARTTLS|unsecure|debug'\\).Line } catch { $_.Exception.Message } })",
+      "PowerShell(npx supabase secrets set MAILTRAP_SMTP_PORT=2525)"
+    ]
+  }
+}

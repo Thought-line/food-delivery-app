@@ -1,0 +1,58 @@
+.quantity-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  border: 1.5px solid var(--text-h);
+  border-radius: 999px;
+  padding: 6px 16px;
+  background: var(--surface);
+}
+
+.quantity-stepper-btn {
+  width: auto;
+  height: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text-h);
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-stepper-btn:hover:not(:disabled) {
+  color: var(--accent);
+}
+
+.quantity-stepper-btn:disabled,
+.quantity-stepper-btn.is-at-max {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.quantity-stepper-btn.is-at-max:hover {
+  color: var(--text-h);
+}
+
+.quantity-stepper-value {
+  min-width: 1em;
+  text-align: center;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.stock-limit-message {
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--warning);
+}
+
+.availability-hint {
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}

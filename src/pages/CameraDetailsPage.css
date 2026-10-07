@@ -1,0 +1,1084 @@
+.camera-details {
+  animation: fade-in-up 0.3s ease;
+}
+
+.camera-details-back {
+  display: inline-flex;
+  margin-bottom: 18px;
+  color: var(--accent);
+}
+
+.camera-details-back:hover {
+  color: var(--accent-hover);
+}
+
+.camera-details-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .camera-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Wraps the media panel + Customer Reviews so reviews sit directly under
+   the image, in the same (left) grid column, instead of spanning full
+   width below the whole page. */
+.camera-details-media-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+/* Deliberately not a bordered "card" — the big image itself (with its own
+   rounded corners + drop shadow, see .camera-details-media) carries the
+   visual weight instead of everything sitting inside one boxed panel. */
+.camera-details-media-panel {
+  position: relative;
+}
+
+.camera-details-share {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.camera-details-share:hover {
+  color: var(--accent);
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-sm);
+  transform: none;
+}
+
+/* --- Wishlist, docked left of Share + Zoom (same row, same positioning
+     context — .camera-details-media-panel — at the right:100px spot
+     .camera-details-copied already clears for a third icon here). --- */
+.camera-details-wishlist {
+  position: absolute;
+  top: 16px;
+  right: 100px;
+  z-index: 1;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+
+.camera-details-wishlist:hover {
+  color: var(--accent);
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-sm);
+  transform: none;
+}
+
+.camera-details-wishlist.is-wishlisted {
+  color: var(--accent);
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+}
+
+.camera-details-copied {
+  position: absolute;
+  top: 18px;
+  /* Was 58px (clear of Share alone) — now the Zoom button also docks at
+     right:58px, so this needs to clear both of them. */
+  right: 100px;
+  z-index: 1;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--text-h);
+  color: var(--surface);
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+  animation: fade-in-up 0.15s ease;
+}
+
+.camera-details-media-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.camera-details-thumbs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.camera-details-thumb {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.camera-details-thumb:hover {
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.camera-details-thumb.is-active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-bg);
+  transform: none;
+}
+
+.camera-details-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camera-details-media {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: radial-gradient(120% 120% at 50% 15%, var(--surface) 0%, var(--accent-bg) 55%, var(--info-bg) 100%);
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Zoom icon, docked next to the panel's Share button (same row, same
+     positioning context — .camera-details-media-panel — offset left by
+     Share's own width + a gap so the two never collide). --- */
+.camera-details-zoom {
+  position: absolute;
+  top: 16px;
+  right: 58px;
+  z-index: 1;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.camera-details-zoom:hover {
+  color: var(--accent);
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-sm);
+  transform: scale(1.06);
+}
+
+/* --- Zoom, as a right-side slide-in drawer — same chrome/pattern as
+     CartDrawer.jsx / SearchDrawer.jsx (fixed backdrop + a fixed, full-height
+     <aside> sliding in from the right), just wider to actually show a photo,
+     and its own header/body/counter content. --- */
+.camera-zoom-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 70;
+  animation: fade-in-up 0.15s ease;
+}
+
+.camera-zoom-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 71;
+  width: 100%;
+  max-width: min(680px, 92vw);
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  /* Rounded on the left edge only — the side that faces into the page —
+     the right edge stays flush with the viewport, so a radius there would
+     never be visible anyway. */
+  border-top-left-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-lg);
+  overflow: hidden;
+  animation: camera-zoom-slide-in 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@keyframes camera-zoom-slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.camera-zoom-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.camera-zoom-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.camera-zoom-close {
+  order: -1;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  background: var(--surface-2);
+  color: var(--text-h);
+  font-size: 1.15rem;
+  line-height: 1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  flex-shrink: 0;
+}
+
+.camera-zoom-close:hover {
+  color: var(--accent);
+  box-shadow: none;
+  transform: none;
+}
+
+.camera-zoom-body {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.camera-zoom-body img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: var(--radius-md);
+  object-fit: contain;
+  background: var(--surface-2);
+}
+
+.camera-zoom-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+}
+
+.camera-zoom-nav:hover {
+  color: var(--accent);
+  border-color: var(--accent-border);
+  transform: translateY(-50%) scale(1.06);
+}
+
+.camera-zoom-nav-prev {
+  left: 12px;
+}
+
+.camera-zoom-nav-next {
+  right: 12px;
+}
+
+.camera-zoom-counter {
+  flex-shrink: 0;
+  margin: 0 20px 20px;
+  padding: 8px 0;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .camera-zoom-drawer {
+    max-width: 100%;
+  }
+}
+
+.camera-details-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 20px;
+  filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.16));
+  /* Remounted with a fresh `key` on every photo change (see the JSX) so
+     this entrance animation replays each time you swipe/click through the
+     thumbnails or the prev/next arrows, instead of the image just
+     snapping to the new photo. */
+  animation: camera-photo-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes camera-photo-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Clicking the photo itself opens the same full-size view as the Zoom
+   button — this just adds the affordance/feedback for that. */
+.camera-details-media-img {
+  cursor: zoom-in;
+  transition: transform 0.25s ease;
+}
+
+.camera-details-media-img:hover {
+  transform: scale(1.035);
+}
+
+.camera-details-media-img:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+/* --- Prev/next through the same photos the thumbnails already show --- */
+.camera-details-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.camera-details-nav:hover {
+  color: var(--accent);
+  border-color: var(--accent-border);
+  transform: translateY(-50%) scale(1.06);
+}
+
+.camera-details-nav-prev {
+  left: 10px;
+}
+
+.camera-details-nav-next {
+  right: 10px;
+}
+
+.camera-details-media-counter {
+  display: block;
+  margin: 10px 0 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.camera-details-media-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* The info column's own content (name, description, ...) starts flush
+   with the grid row's top, same as the image on the left — wishlist/share
+   now live on the image itself (see .camera-details-wishlist/-share below)
+   instead of taking up a header row's worth of height above the title. */
+.camera-details-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.camera-details-status.badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.camera-details-status.badge.available {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.camera-details-status.badge.booked {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.camera-details-info h1 {
+  margin: 0 0 4px;
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+
+.camera-details-model {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.camera-details-blurb-wrap {
+  margin-bottom: 18px;
+}
+
+.camera-details-blurb {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.camera-details-blurb.is-clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.camera-details-blurb-toggle {
+  margin-top: 4px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+  box-shadow: none;
+}
+
+.camera-details-blurb-toggle:hover {
+  text-decoration: underline;
+  box-shadow: none;
+  transform: none;
+}
+
+.camera-details-features {
+  margin-bottom: 18px;
+}
+
+.camera-details-features h3 {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  color: var(--text-h);
+}
+
+.camera-details-features ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.camera-details-features li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.camera-details-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.camera-details-policies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.camera-details-policy-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border: none;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-h);
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: none;
+}
+
+.camera-details-policy-pill:hover {
+  background: var(--accent-bg);
+  color: var(--accent);
+  box-shadow: none;
+  transform: none;
+}
+
+.camera-details-duration {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.camera-details-duration strong {
+  color: var(--text-h);
+}
+
+.camera-details-price-block {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 18px 0 6px;
+}
+
+.camera-details-price {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-h);
+}
+
+.camera-details-price-unit {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.camera-details-price-note {
+  flex-basis: 100%;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.camera-details-actions {
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .camera-details-actions {
+    flex-direction: column;
+  }
+}
+
+.camera-details-book,
+.camera-details-cart {
+  flex: 1;
+  min-width: 0;
+  padding: 13px 16px;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.camera-details-book {
+  border: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: var(--accent-text);
+  box-shadow: 0 6px 16px -6px var(--accent-border);
+}
+
+.camera-details-book:hover:not(:disabled) {
+  filter: brightness(1.06);
+  border: none;
+}
+
+.camera-details-cart {
+  border: 1.5px solid var(--accent-border);
+  background: var(--surface);
+  color: var(--accent);
+}
+
+.camera-details-cart:hover:not(:disabled) {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+}
+.camera-promise {
+  margin-top: 36px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.camera-promise-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: var(--accent-text);
+}
+
+.camera-promise-header-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-promise-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.camera-promise-brand {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.camera-promise-tagline {
+  font-size: 0.85rem;
+  opacity: 0.92;
+}
+
+.camera-promise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  padding: 28px 24px;
+}
+
+@media (max-width: 640px) {
+  .camera-promise-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}
+
+.camera-promise-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.camera-promise-item-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-promise-item h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-h);
+}
+
+.camera-promise-item p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* --- "Key Benefits of Renting?" --- */
+.camera-benefits {
+  margin-top: 36px;
+}
+
+.camera-benefits h2 {
+  margin: 0 0 18px;
+  font-size: 1.2rem;
+}
+
+.camera-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .camera-benefits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.camera-benefit-card {
+  padding: 24px 20px;
+  border-radius: var(--radius-lg);
+  background: var(--surface-2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.camera-benefit-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-benefit-card h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-h);
+}
+
+.camera-benefit-card p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* --- Customer Reviews — sits under the image (see .camera-details-media-col
+     above); the list scrolls horizontally instead of growing the page
+     taller once there's more than a couple of reviews. --- */
+.camera-details-reviews-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.camera-details-reviews-head h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.camera-details-reviews-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.camera-details-reviews-empty {
+  padding: 18px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.camera-details-reviews-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 6px;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  overflow-x: auto;
+}
+
+.camera-details-review-card {
+  flex: 0 0 240px;
+  width: 240px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.camera-details-review-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.camera-details-review-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.camera-details-review-comment {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text);
+  overflow-wrap: break-word;
+}
+
+.camera-details-review-name {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+@media (max-width: 480px) {
+  .camera-details-review-card {
+    flex-basis: 200px;
+    width: 200px;
+  }
+}
+
+/* --- "Similar Products" strip — real catalogue cameras only, no fabricated
+     badges/stats/ratings; see camera-details-similar-card for what each
+     mini-card actually shows. --- */
+.camera-details-similar {
+  margin-top: 36px;
+}
+
+.camera-details-similar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.camera-details-similar-head h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.camera-details-similar-nav {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.camera-details-similar-arrow {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+}
+
+.camera-details-similar-arrow:hover {
+  color: var(--accent);
+  border-color: var(--accent-border);
+  box-shadow: none;
+  transform: none;
+}
+
+.camera-details-similar-list {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scroll-behavior: smooth;
+}
+
+.camera-details-similar-card {
+  flex: 0 0 190px;
+  width: 190px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.camera-details-similar-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-border);
+}
+
+.camera-details-similar-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, var(--accent-bg), var(--info-bg));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-details-similar-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 14px;
+}
+
+.camera-details-similar-heart {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.camera-details-similar-heart:hover {
+  color: var(--accent);
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-sm);
+  transform: none;
+}
+
+.camera-details-similar-heart.is-wishlisted {
+  color: var(--accent);
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+}
+
+.camera-details-similar-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px;
+}
+
+.camera-details-similar-name {
+  font-weight: 700;
+  color: var(--text-h);
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.camera-details-similar-model {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.camera-details-similar-days {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.camera-details-similar-price {
+  margin-top: 4px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.camera-details-similar-price-unit {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-left: 2px;
+}
+
+@media (max-width: 480px) {
+  .camera-details-similar-card {
+    flex-basis: 158px;
+    width: 158px;
+  }
+}
+

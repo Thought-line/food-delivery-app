@@ -1,0 +1,66 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+#root > p {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+#root > p::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2.5px solid var(--border);
+  border-top-color: var(--accent);
+  animation: spin 0.7s linear infinite;
+}
+
+.app-main {
+  width: 100%;
+  /* Horizontal padding lines up with where the "C" of "Capture" starts
+     (not "Dream"'s own "D") — navbar padding (32px) + logo icon (42px) +
+     gap (8px) + the rendered width of "Dream" itself at the wordmark's
+     800-weight 1.6rem size (~75px). Same value both sides, so the right
+     edge matches too. */
+  padding: 40px 157px;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+.app-main > p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-muted);
+  padding: 64px 32px;
+}
+
+.app-main > p::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2.5px solid var(--border);
+  border-top-color: var(--accent);
+  animation: spin 0.7s linear infinite;
+}
+
+.app-main > p[role='alert']::before {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .app-main {
+    padding: 24px 16px 40px;
+  }
+}

@@ -1,0 +1,143 @@
+/* Notification-card style (not the pill used by the cart toast) — icon
+   circle, title + close button on one row, message below. Top-right,
+   slides in from the edge, same "auto-dismiss" behavior as the cart toast.
+   The stack wrapper owns position/width; several cards can be visible at
+   once (one per booking status change), stacked top to bottom. */
+
+.booking-toast-stack {
+  position: fixed;
+  top: 88px;
+  right: 24px;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 340px;
+  max-width: calc(100vw - 32px);
+}
+
+.booking-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  animation: booking-toast-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.booking-toast:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-border);
+}
+
+.booking-toast.is-leaving {
+  animation: booking-toast-out 0.25s ease forwards;
+}
+
+.booking-toast-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+
+.booking-toast-success .booking-toast-icon {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.booking-toast-warning .booking-toast-icon {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.booking-toast-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.booking-toast-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.booking-toast-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.booking-toast-text {
+  margin: 4px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.booking-toast-close {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+}
+
+.booking-toast-close:hover {
+  background: var(--surface-2);
+  color: var(--text-h);
+  box-shadow: none;
+  transform: none;
+}
+
+@keyframes booking-toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes booking-toast-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+}
+
+@media (max-width: 640px) {
+  .booking-toast-stack {
+    top: 76px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+  }
+}

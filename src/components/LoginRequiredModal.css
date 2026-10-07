@@ -1,0 +1,24 @@
+/* Three stacked actions (Login / Sign Up / Continue Browsing) — the shared
+   .confirm-modal-actions is a horizontal 2-button row, so this modal uses
+   its own vertical stack while still borrowing .confirm-overlay/.confirm-modal
+   for the box itself. */
+.login-required-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login-required-actions button {
+  width: 100%;
+}
+
+.login-required-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  border-color: var(--accent);
+  color: var(--accent-text);
+  box-shadow: 0 6px 16px -6px var(--accent-border);
+}
+
+.login-required-primary:hover {
+  filter: brightness(1.06);
+}
